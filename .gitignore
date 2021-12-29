@@ -1,0 +1,10 @@
+node_modules
+.DS_Store
+dist
+*.local
+.history
+yarn-error.log
+lib
+
+coverage
+stats.html
