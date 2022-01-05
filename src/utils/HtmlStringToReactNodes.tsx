@@ -108,7 +108,7 @@ const RenderReactNode = React.memo(function ({
 
     if (attributes['contenteditable'] === 'true') {
       return createElement(tagName, {
-        key: index,
+        key: performance.now(),
         ...attributes,
         style: getStyle(node.getAttribute('style')),
         dangerouslySetInnerHTML: { __html: node.innerHTML },
@@ -171,7 +171,7 @@ function createElement(
       props.tabIndex = '0';
 
     }
-    props.key = props.class;
+    props.key = props.key + props.class;
   }
 
   return React.createElement(type, props);
