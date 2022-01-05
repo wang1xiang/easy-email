@@ -75,9 +75,24 @@ export function useDropBlock() {
           scrollFocusBlockIntoView({ idx, inShadowDom: false });
         }
       };
-
+      const onKeyDown = (ev) => {
+        if (ev.target instanceof HTMLElement) {
+          const target = findBlockNode(ev.target);
+          if (!target) return;
+          const blockType = getNodeTypeFromClassName(target.classList);
+          const idx = getNodeIdxFromClassName(target.classList)!;
+          if (blockType === BasicType.TEXT) {
+            const editNode = getEditNode(target);
+            editNode?.focus();
+          }
+          setFocusIdx(idx);
+          scrollFocusBlockIntoView({ idx, inShadowDom: false });
+        }
+      }
+      ref.addEventListener('keydown', onKeyDown);
       ref.addEventListener('click', onClick);
       return () => {
+      ref.addEventListener('keydown', onKeyDown);
         ref.removeEventListener('click', onClick);
       };
     }

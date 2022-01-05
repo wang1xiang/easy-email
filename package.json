@@ -2,7 +2,7 @@
   "name": "easy-email-editor",
   "license": "MIT",
   "description": "Email editor",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "author": "m-Ryan",
   "repository": {
     "type": "git",
@@ -25,7 +25,7 @@
     "typings": "tsc --declaration --emitDeclarationOnly --project tsconfig.lib.json",
     "test": "jest",
     "lint": "eslint --fix  --ext .tsx,.ts src/ example/",
-    "account": "node scripts/createAccount.js",
+    "account": "node scripts/createAccount.js"
   },
   "husky": {
     "hooks": {
