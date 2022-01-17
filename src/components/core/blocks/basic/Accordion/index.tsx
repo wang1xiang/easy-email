@@ -6,7 +6,7 @@ import { AccordionElement } from '../AccordionElement';
 import { AccordionTitle } from '../AccordionTitle';
 import { AccordionText } from '../AccordionText';
 import { merge } from 'lodash';
-import { IMAGE_LIST } from 'src/assets/image';
+import { IMAGE_LIST } from '@/assets/image';
 
 export type IAccordion = IBlockData<
   {

@@ -1,25 +1,26 @@
-import React from "react";
-import { Stack } from "@/components/UI/Stack";
+import React from 'react';
+import { Stack } from '@/components/UI/Stack';
 import {
   ColorPickerField,
   EditTabField,
   SelectField,
   TextField,
-} from "@/components/core/Form";
-import { Align } from "@/components/EmailEditor/components/ConfigurationPanel/components/AttributesManager/components/Align";
-import { LinkOutlined } from "@ant-design/icons";
-import { INavbar } from ".";
-import { useFocusIdx } from "@/hooks/useFocusIdx";
-import { AttributesPanelWrapper } from "@/components/core/wrapper/AttributesPanelWrapper";
-import { Collapse } from "antd";
-import { NavbarLinkPadding } from "@/components/EmailEditor/components/ConfigurationPanel/components/AttributesManager/components/NavbarLinkPadding";
-import { IMAGE_LIST } from "src/assets/image";
+} from '@/components/core/Form';
+import { Align } from '@/components/EmailEditor/components/ConfigurationPanel/components/AttributesManager/components/Align';
+import { LinkOutlined } from '@ant-design/icons';
+import { INavbar } from '.';
+import { useFocusIdx } from '@/hooks/useFocusIdx';
+import { AttributesPanelWrapper } from '@/components/core/wrapper/AttributesPanelWrapper';
+import { Collapse } from 'antd';
+import { NavbarLinkPadding } from '@/components/EmailEditor/components/ConfigurationPanel/components/AttributesManager/components/NavbarLinkPadding';
+import { IMAGE_LIST } from '@/assets/image';
 
 export function Panel() {
   const { focusIdx } = useFocusIdx();
   return (
     <AttributesPanelWrapper style={{ padding: 0 }}>
-      <Collapse defaultActiveKey={["0", "1", "2"]}>
+      <Collapse defaultActiveKey={['0', '1', '2']}>
+
         <Collapse.Panel key="0" header="Layout">
           <Stack vertical spacing="tight">
             <Align />
@@ -30,20 +31,20 @@ export function Panel() {
           <EditTabField
             tabPosition="left"
             name={`${focusIdx}.data.value.links`}
-            label="Links"
-            renderItem={(item, index) => (
-              <NavbarLink item={item} index={index} />
-            )}
+            label='Links'
+            renderItem={(item, index) => <NavbarLink item={item} index={index} />}
             additionItem={{
               src: IMAGE_LIST.IMAGE_15,
-              target: "_blank",
-              content: "New link",
-              color: "#1890ff",
-              "font-size": "13px",
+              target: '_blank',
+              content: 'New link',
+              color: '#1890ff',
+              'font-size': '13px',
             }}
           />
         </Collapse.Panel>
+
       </Collapse>
+
     </AttributesPanelWrapper>
   );
 }
@@ -52,31 +53,33 @@ function NavbarLink({
   item,
   index,
 }: {
-  item: INavbar["data"]["value"]["links"];
+  item: INavbar['data']['value']['links'];
   index: number;
 }) {
   const { focusIdx } = useFocusIdx();
   return (
     <Stack vertical spacing="tight">
       <TextField
-        label="Content"
+        label='Content'
         name={`${focusIdx}.data.value.links.[${index}].content`}
       />
       <Stack wrap={false}>
+
         <div style={{ width: 65 }}>
           <TextField
-            label="Font size"
+            label='Font size'
             name={`${focusIdx}.data.value.links.[${index}].font-size`}
           />
         </div>
 
         <Stack.Item fill>
           <ColorPickerField
-            label="Color"
+            label='Color'
             name={`${focusIdx}.data.value.links.[${index}].color`}
-            alignment="center"
+            alignment='center'
           />
         </Stack.Item>
+
       </Stack>
 
       <Stack wrap={false}>
@@ -90,19 +93,20 @@ function NavbarLink({
 
         <SelectField
           style={{ minWidth: 65 }}
-          label="Target"
+          label='Target'
           name={`${focusIdx}.data.value.links.[${index}].target`}
           options={[
             {
-              value: "_blank",
-              label: "_blank",
+              value: '_blank',
+              label: '_blank',
             },
             {
-              value: "_self",
-              label: "_self",
+              value: '_self',
+              label: '_self',
             },
           ]}
         />
+
       </Stack>
 
       <NavbarLinkPadding
