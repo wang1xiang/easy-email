@@ -15,7 +15,7 @@ import { ICarousel } from '.';
 import { AttributesPanelWrapper } from '@/components/core/wrapper/AttributesPanelWrapper';
 import { Collapse } from 'antd';
 import { EditorPropsContext } from '@/components/Provider/PropsProvider';
-import { IMAGE_LIST } from 'src/assets/image';
+import { IMAGE_LIST } from '@/assets/image';
 
 const options = [
   {
