@@ -3,6 +3,8 @@ import { IBlockData } from '@/typings';
 import { BasicType } from '@/constants';
 import { createBlock } from '@/utils/createBlock';
 import { merge } from 'lodash';
+import { IMAGE_LIST } from 'easy-email-editor';
+
 export type ICarousel = IBlockData<
   {
     align?: string;
@@ -42,15 +44,15 @@ export const Carousel = createBlock<ICarousel>({
         value: {
           images: [
             {
-              src: 'https://www.mailjet.com/wp-content/uploads/2016/11/ecommerce-guide.jpg',
+              src: IMAGE_LIST.IMAGE_15,
               target: '_blank',
             },
             {
-              src: 'https://www.mailjet.com/wp-content/uploads/2016/09/3@1x.png',
+              src: IMAGE_LIST.IMAGE_16,
               target: '_blank',
             },
             {
-              src: 'https://www.mailjet.com/wp-content/uploads/2016/09/1@1x.png',
+              src: IMAGE_LIST.IMAGE_17,
               target: '_blank',
             },
           ],
@@ -58,8 +60,8 @@ export const Carousel = createBlock<ICarousel>({
       },
       attributes: {
         align: 'center',
-        'left-icon': 'https://i.imgur.com/xTh3hln.png',
-        'right-icon': 'https://i.imgur.com/os7o9kz.png',
+        'left-icon': IMAGE_LIST.IMAGE_18,
+        'right-icon': IMAGE_LIST.IMAGE_19,
         'icon-width': '44px',
         thumbnails: 'visible',
       },

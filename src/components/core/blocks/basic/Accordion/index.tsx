@@ -6,6 +6,8 @@ import { AccordionElement } from '../AccordionElement';
 import { AccordionTitle } from '../AccordionTitle';
 import { AccordionText } from '../AccordionText';
 import { merge } from 'lodash';
+import { IMAGE_LIST } from 'easy-email-editor';
+
 export type IAccordion = IBlockData<
   {
     'icon-width': string;
@@ -41,8 +43,8 @@ export const Accordion = createBlock<IAccordion>({
         'icon-width': '32px',
         'icon-align': 'middle',
         'icon-position': 'right',
-        'icon-unwrapped-url': 'https://i.imgur.com/w4uTygT.png',
-        'icon-wrapped-url': 'https://i.imgur.com/bIXv1bk.png',
+        'icon-unwrapped-url': IMAGE_LIST.IMAGE_09,
+        'icon-wrapped-url': IMAGE_LIST.IMAGE_10,
         padding: '10px 25px 10px 25px',
         border: '1px solid #d9d9d9',
       },

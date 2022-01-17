@@ -13,6 +13,7 @@ import { useFocusIdx } from '@/hooks/useFocusIdx';
 import { AttributesPanelWrapper } from '@/components/core/wrapper/AttributesPanelWrapper';
 import { Collapse } from 'antd';
 import { NavbarLinkPadding } from '@/components/EmailEditor/components/ConfigurationPanel/components/AttributesManager/components/NavbarLinkPadding';
+import { IMAGE_LIST } from 'easy-email-editor';
 
 export function Panel() {
   const { focusIdx } = useFocusIdx();
@@ -33,7 +34,7 @@ export function Panel() {
             label='Links'
             renderItem={(item, index) => <NavbarLink item={item} index={index} />}
             additionItem={{
-              src: 'https://www.mailjet.com/wp-content/uploads/2016/11/ecommerce-guide.jpg',
+              src: IMAGE_LIST.IMAGE_15,
               target: '_blank',
               content: 'New link',
               color: '#1890ff',

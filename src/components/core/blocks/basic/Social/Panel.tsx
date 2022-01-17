@@ -95,7 +95,7 @@ export function Panel() {
               href: '',
               'icon-size': '20px',
               target: '_blank',
-              src: IMAGE_LIST.IMAGE_05,
+              src: IMAGE_LIST.IMAGE_02,
               content: 'Google',
             }}
           />

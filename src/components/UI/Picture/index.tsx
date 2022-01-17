@@ -29,6 +29,7 @@ export function Picture(props: IPictureProps) {
         },
       }}
     >
+      {/* Custom */}
       <source
         type='image/webp'
         srcSet={url + '?imageView2/3/q/70/w/750/format/webp'}

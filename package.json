@@ -1,12 +1,12 @@
 {
-  "name": "easy-email-editor",
+  "name": "quick-easy-email-editor",
   "license": "MIT",
   "description": "Email editor",
   "version": "2.2.3",
-  "author": "m-Ryan",
+  "author": "wangxiang",
   "repository": {
     "type": "git",
-    "url": "git@github.com:m-Ryan/easy-email.git"
+    "url": "git@github.com:wang1xiang/easy-email.git"
   },
   "keywords": [
     "email editor"

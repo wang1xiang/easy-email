@@ -5,6 +5,7 @@ import { merge } from 'lodash';
 import { Button } from '../Button';
 import { Text } from '../Text';
 import { createBlock } from '@/utils/createBlock';
+import { IMAGE_LIST } from 'easy-email-editor';
 export type IHero = IBlockData<
   {
     'background-color'?: string;
@@ -38,8 +39,7 @@ export const Hero = createBlock<IHero>({
         mode: 'fluid-height',
         padding: '100px 0px 100px 0px',
         'vertical-align': 'top',
-        'background-url':
-          'https://cloud.githubusercontent.com/assets/1830348/15354890/1442159a-1cf0-11e6-92b1-b861dadf1750.jpg',
+        'background-url': IMAGE_LIST.IMAGE_72
       },
       children: [
         Text.create({
