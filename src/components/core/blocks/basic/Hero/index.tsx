@@ -5,7 +5,7 @@ import { merge } from 'lodash';
 import { Button } from '../Button';
 import { Text } from '../Text';
 import { createBlock } from '@/utils/createBlock';
-import { IMAGE_LIST } from 'easy-email-editor';
+import { IMAGE_LIST } from 'src/assets/image';
 export type IHero = IBlockData<
   {
     'background-color'?: string;

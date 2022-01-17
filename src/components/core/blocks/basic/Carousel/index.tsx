@@ -3,7 +3,7 @@ import { IBlockData } from '@/typings';
 import { BasicType } from '@/constants';
 import { createBlock } from '@/utils/createBlock';
 import { merge } from 'lodash';
-import { IMAGE_LIST } from 'easy-email-editor';
+import { IMAGE_LIST } from 'src/assets/image';
 
 export type ICarousel = IBlockData<
   {
