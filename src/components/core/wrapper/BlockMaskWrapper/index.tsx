@@ -38,41 +38,38 @@ export const BlockMaskWrapper: React.FC<{
   }, []);
 
   return (
-    <div style={{ position: 'relative', }}>
-      {props.children}
-      <div
-        className={styles.wrapper}
-        style={{
-          position: 'absolute',
-          height: '100%',
-          transform: 'translate(32px)',
-          top: 0,
-          right: 0,
-          display: 'flex',
-          justifyContent: 'flex-end',
-        }}
-      >
-        <BlockAvatarWrapper type={type} payload={payload}>
-          <div
-            ref={ref}
-            className={styles.mask}
-            onMouseDown={onMaskMouseDown}
-          >
-
-            <div ref={dragRef} style={{
-              position: 'relative', zIndex: 10,
-
-            }}
-              onMouseDown={onMouseDown}
+    <div style={{ position: 'relative' }}>
+      <BlockAvatarWrapper type={type} payload={payload}>
+        {props.children}
+        <div
+          className={styles.wrapper}
+          style={{
+            position: 'absolute',
+            height: '100%',
+            transform: 'translate(32px)',
+            top: 0,
+            right: 0,
+            display: 'flex',
+            justifyContent: 'flex-end',
+          }}
+        >
+            <div
+              ref={ref}
+              className={styles.mask}
             >
-              <IconFont
-                iconName='icon-drag'
-                style={{ fontSize: 25, lineHeight: '25px', cursor: 'grab' }}
-              />
+
+              <div ref={dragRef} style={{
+                position: 'relative', zIndex: 10,
+              }}
+              >
+                <IconFont
+                  iconName='icon-drag'
+                  style={{ fontSize: 25, lineHeight: '25px', cursor: 'grab' }}
+                />
+              </div>
             </div>
-          </div>
-        </BlockAvatarWrapper>
-      </div>
+        </div>
+      </BlockAvatarWrapper>
     </div>
   );
 };
