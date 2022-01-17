@@ -37,9 +37,6 @@ import { useCollection } from './components/useCollection';
 import { customBlocks } from './components/CustomBlocks';
 import mustache from 'mustache';
 
-// overwrite default image
-(IMAGE_LIST as any).IMAGE_01 = 'http://5vph.mj.am/img/5vph/b/1g8pi/068ys.png';
-
 const fontList = [
   'Arial',
   'Tahoma',

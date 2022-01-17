@@ -15,6 +15,7 @@ import { ICarousel } from '.';
 import { AttributesPanelWrapper } from '@/components/core/wrapper/AttributesPanelWrapper';
 import { Collapse } from 'antd';
 import { EditorPropsContext } from '@/components/Provider/PropsProvider';
+import { IMAGE_LIST } from 'easy-email-editor';
 
 const options = [
   {
@@ -62,7 +63,7 @@ export function Panel() {
                 <CarouselImage item={item} index={index} />
               )}
               additionItem={{
-                src: 'https://www.mailjet.com/wp-content/uploads/2016/11/ecommerce-guide.jpg',
+                src: IMAGE_LIST.IMAGE_15,
                 target: '_blank',
               }}
             />

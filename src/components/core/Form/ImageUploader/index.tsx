@@ -12,7 +12,6 @@ import { Uploader, UploaderServer } from '@/utils/Uploader';
 import { classnames } from '@/utils/classnames';
 import { previewLoadImage } from '@/utils/previewLoadImage';
 import { IMAGE_LIST } from '@/assets/image';
-const LOADING_ICON = IMAGE_LIST.IMAGE_07;
 
 export interface ImageUploaderProps {
   onChange: (val: string) => void;
@@ -96,7 +95,6 @@ export function ImageUploader(props: ImageUploaderProps) {
       return (
         <div className={styles['item']}>
           <div className={classnames(styles['info'])}>
-            <img src={LOADING_ICON} alt='Loading...' />
             <div className={styles['btn-wrap']} />
           </div>
         </div>
@@ -115,6 +113,7 @@ export function ImageUploader(props: ImageUploaderProps) {
     return (
       <div className={styles['item']}>
         <div className={classnames(styles['info'])}>
+          {/* property preview */}
           <img src={props.value} />
           <div className={styles['btn-wrap']}>
             <a title='Preview' onClick={() => setPreview(true)}>
