@@ -18,7 +18,7 @@ export function TextBlockItem() {
                 payload={{
                   attributes: {
                     'font-size': item + 'px',
-                    padding: '0px 0px 0px 0px'
+                    padding: '10px 25px'
                   },
                   data: {
                     value: {

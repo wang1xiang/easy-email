@@ -18,69 +18,41 @@ import { InlineTextProps } from '../InlineTextField';
 import { TextToolbar } from './components/TextToolbar';
 import styles from './index.module.scss';
 
-const TEXT_BAR_LOCATION_KEY = 'TEXT_BAR_LOCATION_KEY';
 const RichTextFieldItem = (
   props: Omit<InlineTextProps, 'onChange' | 'mutators'> & EnhancerProps<string>
 ) => {
   const { activeTab } = useActiveTab();
   const isActive = activeTab === ActiveTabKeys.EDIT;
 
-  const [locationState, setLocationState] = useLocalStorage<{ left: number; top: number; } | null>(
-    TEXT_BAR_LOCATION_KEY,
-    null
-  );
-
-  const [position, setPosition] = useState(locationState || { top: 0, left: 0 });
-
   const { idx } = props;
 
   const container = findBlockNodeByIdx(idx);
 
-  useEffect(() => {
-    if (!locationState) {
-      const fixContainer = getEditorRoot();
-      if (fixContainer) {
-        const { left, top } = fixContainer.getBoundingClientRect();
+  // useEffect(() => {
+  //   const fixContainer = getEditorRoot();
+  //   if (fixContainer) {
+  //     const { left, top } = fixContainer.getBoundingClientRect();
 
-        setPosition({
-          left: left,
-          top: top - 46,
-        });
-      }
-    }
+  //     setPosition({
+  //       left: left,
+  //       top: top - 46,
+  //     });
+  //   }
 
-  }, [locationState]);
+  // }, [locationState]);
 
   const editorContainer = container && getEditNode(container);
 
-  const onMoveTextToolbar = useCallback((event: React.MouseEvent) => {
-    onDrag({
-      event: event as any,
-      onMove(x, y) {
-        const nextX = position.left + x;
-        const nextY = position.top + y;
-        setPosition({
-          left: nextX,
-          top: nextY,
-        });
-        setLocationState({
-          left: nextX,
-          top: nextY,
-        });
-      },
-      onEnd() { },
-    });
-  }, [position.left, position.top, setLocationState]);
-
   const textToolbar = useMemo(() => {
-
+    const { left, top } = editorContainer!.getBoundingClientRect();
     return createPortal(
       <div
         className={styles.container}
         key={idx}
         style={{
           position: 'fixed',
-          ...position,
+          left: left - 25,
+          top: top - 32,
           transform: 'translate(0,-100%)',
           padding: '10px 12px',
           boxSizing: 'border-box',
@@ -97,9 +69,7 @@ const RichTextFieldItem = (
             width: '100%',
             left: 0,
             top: 0,
-            cursor: 'move',
           }}
-          onMouseDown={onMoveTextToolbar}
         />
         <div style={{ position: 'relative', zIndex: 1 }}>
           <TextToolbar container={editorContainer} onChange={() => { }} />
@@ -107,7 +77,7 @@ const RichTextFieldItem = (
       </div>,
       document.getElementById(FIXED_CONTAINER_ID) as HTMLDivElement
     );
-  }, [idx, position, isActive, onMoveTextToolbar, editorContainer]);
+  }, [idx, isActive, editorContainer]);
 
   return (
     <>
