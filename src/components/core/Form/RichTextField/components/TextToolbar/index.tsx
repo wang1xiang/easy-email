@@ -16,7 +16,7 @@ import {
   AlignCenterOutlined,
   CloseOutlined,
 } from '@ant-design/icons';
-import { Button, Tooltip } from 'antd';
+import { Button, Tooltip, Divider } from 'antd';
 import { ToolItem } from '../../components/ToolItem';
 import { Link, LinkParams } from '../../components/Link';
 import { FontSizeList } from '../../components/FontSizeList';
@@ -142,6 +142,22 @@ export function TextToolbar(props: TextToolbarProps) {
           >
             <ToolItem icon={<BgColorsOutlined />} title='Background color' />
           </ColorPicker>
+          <ToolItem
+            onClick={() => execCommand('strikeThrough')}
+            icon={<StrikethroughOutlined />}
+            title='StrikethroughOutlined'
+          />
+          <ToolItem
+            onClick={() => execCommand('underline')}
+            icon={<UnderlineOutlined />}
+            title='UnderlineOutlined'
+          />
+
+          <ToolItem
+            onClick={() => execCommand('insertHorizontalRule')}
+            icon={<MinusOutlined />}
+            title='Line'
+          />
           <Link
             currentRange={currentRange}
             onChange={(values) => execCommand('createLink', values)}
@@ -165,13 +181,6 @@ export function TextToolbar(props: TextToolbarProps) {
             </Tooltip>
           )}
 
-          <ToolItem
-            onClick={() => execCommand('removeFormat')}
-            icon={<CloseOutlined />}
-            title='Remove format'
-          />
-        </Stack>
-        <Stack spacing='extraTight'>
           <ToolItem
             onClick={() => execCommand('justifyLeft')}
             icon={<AlignLeftOutlined />}
@@ -197,21 +206,11 @@ export function TextToolbar(props: TextToolbarProps) {
             icon={<UnorderedListOutlined />}
             title='Unorderlist'
           />
-          <ToolItem
-            onClick={() => execCommand('strikeThrough')}
-            icon={<StrikethroughOutlined />}
-            title='StrikethroughOutlined'
-          />
-          <ToolItem
-            onClick={() => execCommand('underline')}
-            icon={<UnderlineOutlined />}
-            title='UnderlineOutlined'
-          />
 
           <ToolItem
-            onClick={() => execCommand('insertHorizontalRule')}
-            icon={<MinusOutlined />}
-            title='Line'
+            onClick={() => execCommand('removeFormat')}
+            icon={<CloseOutlined />}
+            title='Remove format'
           />
         </Stack>
       </Stack>
