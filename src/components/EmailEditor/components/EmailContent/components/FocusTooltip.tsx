@@ -87,7 +87,7 @@ export function FocusTooltip() {
                     justifyContent: 'center',
                     transform: 'translate(-50%, -50%)',
                     borderRadius: '50%',
-                    cursor: 'grab',
+                    cursor: 'move',
                     pointerEvents: 'auto',
                     WebkitUserDrag: 'element',
                   } as any
@@ -95,7 +95,7 @@ export function FocusTooltip() {
               >
                 <IconFont
                   iconName='icon-move'
-                  style={{ color: '#fff', cursor: 'grab' }}
+                  style={{ color: '#fff', cursor: 'move' }}
                 />
               </div>
             </BlockAvatarWrapper>

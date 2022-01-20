@@ -1,11 +1,16 @@
 .container {
   background-color: #fff;
+
   :global(.ant-collapse-content > .ant-collapse-content-box) {
     padding: 0;
+  }
+  :global(.ant-collapse-content) {
+    border: none;
   }
   .collapse {
     background-color: #fff;
     border-left: none;
+
     .list {
       padding: 10px;
       display: flex;
@@ -15,14 +20,27 @@
 
     }
   }
+
+  :global {
+    .ant-card-grid-hoverable:hover {
+      border-color: #3f88f6;
+      transition: all .2s ease-in-out;
+      box-shadow: 0 0 0 1px #3f88f6;
+    }
+    .ant-card-bordered {
+      border-left: 0;
+    }
+  }
 }
 
-.container  .layoutGrid {
-  width: 50%;
-  padding: 10px;
+.container .layoutGrid {
+  width: 126px;
+  margin: 4px;
+  padding: 0;
 }
 
-.container  .contentGrid {
-  width: 33%;
+.container .contentGrid {
+  width: 80px;
+  margin: 4px;
   padding: 0px;
 }

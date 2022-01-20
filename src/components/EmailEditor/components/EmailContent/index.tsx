@@ -42,8 +42,9 @@ export function EmailContent() {
       <>
         <ShadowStyle />
         <div
+          id="shadow-container"
           className='shadow-container'
-          style={{ height: '100%', overflowY: 'auto', zIndex: 10 }}
+          style={{ height: '100%', overflowY: 'auto', zIndex: 10, position: 'relative' }}
           ref={setContainerRef}
           onScroll={onScroll}
         >

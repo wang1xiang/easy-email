@@ -91,7 +91,7 @@ function TwoColumns() {
     <Stack vertical spacing='tight'>
       <Stack distribution='equalSpacing'>
         <TextStyle>2 column</TextStyle>
-        <Button type='link' onClick={() => setVisible((v) => !v)}>
+        <Button style={{ padding: 0, height: 0 }} type='link' onClick={() => setVisible((v) => !v)}>
           {visible ? 'Show less options' : 'Show more options'}
         </Button>
       </Stack>
@@ -171,7 +171,7 @@ function ThreeColumns() {
     <Stack vertical spacing='tight'>
       <Stack distribution='equalSpacing'>
         <TextStyle>3 column</TextStyle>
-        <Button type='link' onClick={() => setVisible((v) => !v)}>
+        <Button style={{ padding: 0, height: 0 }} type='link' onClick={() => setVisible((v) => !v)}>
           {visible ? 'Show less options' : 'Show more options'}
         </Button>
       </Stack>

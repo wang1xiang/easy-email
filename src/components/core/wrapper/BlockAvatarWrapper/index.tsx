@@ -51,7 +51,7 @@ export const BlockAvatarWrapper: React.FC<BlockAvatarWrapperProps> = (
       idx={idx}
     >
       <div
-        style={{ cursor: 'grab' }}
+        style={{ cursor: 'move' }}
         ref={ref}
         onMouseDown={() => {
           window.getSelection()?.removeAllRanges();

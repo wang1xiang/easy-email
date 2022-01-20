@@ -156,7 +156,7 @@ export function BlockTreeItem<T extends TreeNode<T>>(
           </div>
           <IconFont
             iconName='icon-drag'
-            style={{ cursor: 'grab', fontSize: 12 }}
+            style={{ cursor: 'move', fontSize: 12 }}
           />
         </div>
       </ReactSortable>

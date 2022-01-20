@@ -12,6 +12,7 @@ export const ToolItem: React.FC<{
     <Button
       title={props.title}
       size='small'
+      style={{ marginRight: 2, height: 26, lineHeight: '26px' }}
       icon={props.icon}
       onClick={props.onClick}
     />
