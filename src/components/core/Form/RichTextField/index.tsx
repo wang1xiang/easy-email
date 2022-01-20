@@ -43,8 +43,12 @@ const RichTextFieldItem = (
   // }, [locationState]);
 
   const editorContainer = container && getEditNode(container);
+  console.log(editorContainer);
   const textToolbar = useMemo(() => {
     if (editorContainer) {
+      // 获取shadow内的节点 需要使用getShadowRoot
+      const rootContainer = getShadowRoot().getElementById('shadow-container')!;
+      const c = rootContainer.getBoundingClientRect();
       const { left, top } = editorContainer.getBoundingClientRect();
       return createPortal(
         <div
@@ -52,8 +56,8 @@ const RichTextFieldItem = (
           key={idx}
           style={{
             position: 'absolute',
-            left: left - 386,
-            top: top - 162,
+            left: left - c.left - 25,
+            top: top - c.top - 32 + rootContainer.scrollTop,
             transform: 'translate(0,-100%)',
             padding: '10px 12px',
             boxSizing: 'border-box',
