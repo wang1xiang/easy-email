@@ -2,6 +2,7 @@ import { IEmailTemplate } from '@/typings';
 import { Form, useForm, useFormState, useField } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import React, { useMemo, useRef } from 'react';
+import { emailToImage } from '@/utils/emailToImage';
 import { BlocksProvider } from '..//BlocksProvider';
 import { HoverIdxProvider } from '../HoverIdxProvider';
 import { PropsProvider, PropsProviderProps } from '../PropsProvider';
@@ -41,11 +42,15 @@ export const EmailEditorProvider = (
   }, [data]);
 
   if (!initialValues.content) return null;
+  const handleSubmit = async (a, b, c) => {
+    const image = await emailToImage(a.content);
+    onSubmit(a, image);
+  }
 
   return (
     <Form<IEmailTemplate>
       initialValues={initialValues}
-      onSubmit={onSubmit}
+      onSubmit={(a, b, c) => handleSubmit(a, b, c)}
       enableReinitialize
       validate={validationSchema}
       mutators={{ ...arrayMutators, setFieldTouched }}

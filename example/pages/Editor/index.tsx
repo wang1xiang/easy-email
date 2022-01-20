@@ -117,7 +117,7 @@ export default function Editor() {
   const onSubmit = useCallback(
     async (
       values: IEmailTemplate,
-      form: FormApi<IEmailTemplate, Partial<IEmailTemplate>>
+      image
     ) => {
       pushEvent({ name: 'Save' });
       if (id) {
@@ -127,7 +127,7 @@ export default function Editor() {
             template: values,
             success() {
               message.success('Updated success!');
-              form.restart(values);
+              console.log(image);
             },
           })
         );

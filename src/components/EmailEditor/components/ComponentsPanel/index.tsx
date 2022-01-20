@@ -34,7 +34,7 @@ export const ComponentsPanel = React.memo(function () {
           header="Layout"
           key="2"
           extra={
-            <Button type="link" onClick={onToggleMore}>
+            <Button style={{ padding: 0, height: 0 }} type="link" onClick={onToggleMore}>
               {visible ? ' Show less' : ' Show more'}
             </Button>
           }
@@ -65,7 +65,7 @@ export const ComponentsPanel = React.memo(function () {
           </div>
         </Panel>
         <Panel header="Content" key="1">
-          <Card style={{ padding: '10px' }}>
+          <Card bodyStyle={{ padding: 10 }}>
             {
               contentCategory?.blocks.map(item => (
                 <Card.Grid className={styles.contentGrid} key={item.type}>

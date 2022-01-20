@@ -64,7 +64,7 @@ export const BlockMaskWrapper: React.FC<{
               >
                 <IconFont
                   iconName='icon-drag'
-                  style={{ fontSize: 25, lineHeight: '25px', cursor: 'grab' }}
+                  style={{ fontSize: 25, lineHeight: '25px', cursor: 'move' }}
                 />
               </div>
             </div>

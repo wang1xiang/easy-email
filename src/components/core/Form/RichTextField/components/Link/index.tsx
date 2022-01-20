@@ -129,7 +129,7 @@ export function Link(props: LinkProps) {
               </Stack>
             }
           >
-            <Button title='Link' size='small' icon={<LinkOutlined />} />
+            <Button style={{ marginRight: 2,  height: 26, lineHeight: '26px' }} title='Link' size='small' icon={<LinkOutlined />} />
           </Tooltip>
         );
       }}

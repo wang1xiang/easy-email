@@ -17,6 +17,7 @@ import { InlineTextField } from '../index';
 import { InlineTextProps } from '../InlineTextField';
 import { TextToolbar } from './components/TextToolbar';
 import styles from './index.module.scss';
+import { getShadowRoot } from '@/utils/findBlockNodeByIdx';
 
 const RichTextFieldItem = (
   props: Omit<InlineTextProps, 'onChange' | 'mutators'> & EnhancerProps<string>
@@ -42,41 +43,42 @@ const RichTextFieldItem = (
   // }, [locationState]);
 
   const editorContainer = container && getEditNode(container);
-
   const textToolbar = useMemo(() => {
-    const { left, top } = editorContainer!.getBoundingClientRect();
-    return createPortal(
-      <div
-        className={styles.container}
-        key={idx}
-        style={{
-          position: 'fixed',
-          left: left - 25,
-          top: top - 32,
-          transform: 'translate(0,-100%)',
-          padding: '10px 12px',
-          boxSizing: 'border-box',
-
-          zIndex: 100,
-          display: Boolean(isActive) ? undefined : 'none',
-        }}
-      >
+    if (editorContainer) {
+      const { left, top } = editorContainer.getBoundingClientRect();
+      return createPortal(
         <div
+          className={styles.container}
+          key={idx}
           style={{
             position: 'absolute',
-            backgroundColor: '#41444d',
-            height: '100%',
-            width: '100%',
-            left: 0,
-            top: 0,
+            left: left - 386,
+            top: top - 162,
+            transform: 'translate(0,-100%)',
+            padding: '10px 12px',
+            boxSizing: 'border-box',
+
+            zIndex: 100,
+            display: Boolean(isActive) ? undefined : 'none',
           }}
-        />
-        <div style={{ position: 'relative', zIndex: 1 }}>
-          <TextToolbar container={editorContainer} onChange={() => { }} />
-        </div>
-      </div>,
-      document.getElementById(FIXED_CONTAINER_ID) as HTMLDivElement
-    );
+        >
+          <div
+            style={{
+              position: 'absolute',
+              backgroundColor: '#41444d',
+              height: '46px',
+              width: '560px',
+              left: 0,
+              top: 0,
+            }}
+          />
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            <TextToolbar container={editorContainer} onChange={() => { }} />
+          </div>
+        </div>,
+        getShadowRoot().getElementById('shadow-container') as HTMLDivElement
+      );
+    }
   }, [idx, isActive, editorContainer]);
 
   return (
