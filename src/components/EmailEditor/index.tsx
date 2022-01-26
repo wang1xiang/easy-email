@@ -52,7 +52,6 @@ export const EmailEditor = (props: EmailEditorProps) => {
             display: 'flex',
             width: '100vw',
             overflow: 'hidden',
-            minWidth: 1400,
           }}
         >
           <Layout.Sider
