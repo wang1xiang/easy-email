@@ -40,7 +40,7 @@ export function useEmailModal() {
       const content = JSON.parse(mustache.render(JSON.stringify(emailData.content), mergeTagsPayload));
       const customBlockData = injectData(content);
 
-      const html = mjml(transformToMjml({
+      let html = mjml(transformToMjml({
         data: customBlockData,
         mode: 'production',
         context: customBlockData
@@ -48,14 +48,19 @@ export function useEmailModal() {
         beautify: true,
         validationLevel: 'soft',
       }).html;
-
+      html = html.replace(/<style type="text\/css">(([\s\S])*?)<\/style>/, (match, $1) => {
+        console.log(match);
+        return `<style type="text/css">
+          ${$1} .mjml-body {margin: 0 auto}
+        </style>`
+      });
       dispatch(
         email.actions.send({
           data: {
             toEmail: values.toEmail,
             subject: emailData.subject,
             text: emailData.subTitle || emailData.subject,
-            html: html,
+            html,
           },
           success: () => {
             closeModal();

@@ -36,10 +36,12 @@ const TabPane = Tabs.TabPane;
 export const EmailEditor = (props: EmailEditorProps) => {
   const { height: containerHeight } = props;
   const { activeTab, setActiveTab } = useActiveTab();
+  // 页面内容  data children attributes等
   const { pageData } = useEditorContext();
 
   const backgroundColor = pageData.attributes['background-color'];
 
+  // 没发现有什么用
   const fixedContainer = useMemo(() => {
     return createPortal(<div id={FIXED_CONTAINER_ID} />, document.body);
   }, []);
@@ -59,6 +61,7 @@ export const EmailEditor = (props: EmailEditorProps) => {
             width={60}
             style={{ border: '1px solid #f0f0f0' }}
           >
+            {/* 左侧Drag block */}
             <ShortcutToolbar height={containerHeight} />
           </Layout.Sider>
           <Layout.Sider
@@ -89,9 +92,11 @@ export const EmailEditor = (props: EmailEditorProps) => {
                   tab="Blocks"
                   style={{ borderLeft: 'none' }}
                 >
+                  {/* Blocks */}
                   <ComponentsPanel />
                 </TabPane>
                 <TabPane style={{ paddingTop: 10 }} key="Layout" tab="Layout">
+                  {/* Layout */}
                   <BlockLayerManager />
                 </TabPane>
               </Tabs>
@@ -102,7 +107,6 @@ export const EmailEditor = (props: EmailEditorProps) => {
             <Card
               bodyStyle={{
                 backgroundColor: backgroundColor,
-
                 padding: 0,
               }}
             >
@@ -140,6 +144,7 @@ export const EmailEditor = (props: EmailEditorProps) => {
                         position: 'relative',
                       }}
                     >
+                      {/* 编辑页面 */}
                       <EditEmailPreview />
                     </div>
                   </TabPane>
@@ -153,6 +158,7 @@ export const EmailEditor = (props: EmailEditorProps) => {
                     key={ActiveTabKeys.PC}
                     style={{ backgroundColor: 'transparent' }}
                   >
+                    {/* 预览 */}
                     <DesktopEmailPreview />
                   </TabPane>
                   <TabPane
@@ -165,6 +171,7 @@ export const EmailEditor = (props: EmailEditorProps) => {
                     key={ActiveTabKeys.MOBILE}
                     style={{ backgroundColor: 'transparent' }}
                   >
+                    {/* 预览 */}
                     <MobileEmailPreview />
                   </TabPane>
                 </Tabs>
@@ -187,6 +194,7 @@ export const EmailEditor = (props: EmailEditorProps) => {
               bodyStyle={{ padding: 0 }}
               className={styles.customScrollBar}
             >
+              {/* 对应配置 */}
               <ConfigurationPanel />
             </Card>
           </Layout.Sider>

@@ -2,13 +2,13 @@ import axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
 import { UserStorage } from '@example/util/user-storage';
 
 export const axiosInstance = axios.create({
-  baseURL: 'https://www.maocanhua.cn'
+  baseURL: '/email'
 });
 
 axiosInstance.interceptors.request.use(async function (config) {
   try {
     const token = await UserStorage.getToken();
-    config.headers.authorization = token;
+    config.headers['quick-token'] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNDc1NDAzMDUwMjE4OTA5Njk4IiwiZXhwIjoxNjQ2OTIzMjM2LCJzdG9yZUlkIjo0OTEsImlhdCI6MTY0Njg4MDAzNiwidXNlcklkIjoxNDc1NDAzMDUwMjE4OTA5Njk4LCJzdGFmZklkIjoxNDk5NjcxMTA3ODAyNDI3MzkzfQ.mpq8lbR1KiawBA39KRg4wgayykL3kEkv8UjTJV6bsf0';
   } catch (error) {
     // window.location.assign(LOGIN_ADDRESS);
   } finally {
