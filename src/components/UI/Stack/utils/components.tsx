@@ -58,6 +58,7 @@ export function isElementOfType<P>(
 
 // Returns all children that are valid elements as an array. Can optionally be
 // filtered by passing `predicate`.
+// 将所有作为有效元素的子元素作为数组返回 并且可以传入predicate方法进行过滤
 export function elementChildren<T extends React.ReactElement>(
   children: React.ReactNode,
   predicate: (element: T) => boolean = () => true,

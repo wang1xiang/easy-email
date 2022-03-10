@@ -1,7 +1,7 @@
 import { IEmailTemplate } from '@/typings';
 import { Form, useForm, useFormState, useField } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo } from 'react';
 import { emailToImage } from '@/utils/emailToImage';
 import { BlocksProvider } from '..//BlocksProvider';
 import { HoverIdxProvider } from '../HoverIdxProvider';
@@ -14,8 +14,7 @@ import { useEffect, useState } from 'react';
 import setFieldTouched from 'final-form-set-field-touched';
 import { PresetColorsProvider } from '../PresetColorsProvider';
 
-export interface EmailEditorProviderProps<T extends IEmailTemplate = any>
-  extends PropsProviderProps {
+export interface EmailEditorProviderProps<T extends IEmailTemplate = any> extends PropsProviderProps {
   data: T;
   children: (
     props: FormState<T>,
@@ -58,13 +57,21 @@ export const EmailEditorProvider = (
     >
       {() => (
         <>
+          {/* context 传递所有props的参数 */}
           <PropsProvider {...props}>
+            {/* context 处理前进后退重置等操作 */}
             <RecordProvider>
+              {/* context 拖拽、收起展开状态、当前鼠标focus等操作 */}
               <BlocksProvider>
+                {/* context hover、方向、是否拖动等操作 */}
                 <HoverIdxProvider>
+                  {/* context 选择区域 */}
                   <SelectionRangeProvider>
+                    {/* context scrollHeight */}
                     <ScrollProvider>
+                      {/* context 样式颜色 */}
                       <PresetColorsProvider>
+                        {/* EmailEditor和其他内容 */}
                         <FormikWrapper children={children} />
                       </PresetColorsProvider>
                     </ScrollProvider>

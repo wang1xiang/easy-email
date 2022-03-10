@@ -7,7 +7,7 @@ import { Item } from './components/Item';
 import styles from './Stack.module.scss';
 
 // From polaris-react
-
+// polaris-react shopify所用的组件库
 type Spacing = 'extraTight' | 'tight' | 'loose' | 'extraLoose' | 'none';
 
 type Alignment = 'leading' | 'trailing' | 'center' | 'fill' | 'baseline';
