@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
   BoldOutlined,
   ItalicOutlined,
@@ -16,19 +16,20 @@ import {
   AlignCenterOutlined,
   CloseOutlined,
 } from '@ant-design/icons';
-import { Button, Tooltip, Divider } from 'antd';
+import { v4 as uuidv4 } from 'uuid';
+import { Button, Tooltip } from 'antd';
 import { ToolItem } from '../../components/ToolItem';
 import { Link, LinkParams } from '../../components/Link';
 import { FontSizeList } from '../../components/FontSizeList';
+import { Heading } from '../../components/Heading';
 import { getShadowRoot } from '@/utils/findBlockNodeByIdx';
 import { Stack } from '@/components/UI/Stack';
+import { TextStyle } from '@/components/UI/TextStyle';
 import { ColorPicker } from '../../../ColorPicker';
 import { FontFamily } from '../FontFamily';
+import { useContext } from 'react';
+import { SelectionRangeContext } from '@/components/Provider/SelectionRangeProvider';
 import { useSelectionRange } from '@/hooks/useSelectionRange';
-import { FIXED_CONTAINER_ID } from '@/constants';
-import { IconFont } from '@/components/IconFont';
-import { MergeTags } from '@/components/EmailEditor/components/ConfigurationPanel/components/AttributesManager/components/MergeTags';
-import { EditorPropsContext } from '@/components/Provider/PropsProvider';
 
 export interface TextToolbarProps {
   onChange: (content: string) => any;
@@ -38,8 +39,6 @@ export interface TextToolbarProps {
 export function TextToolbar(props: TextToolbarProps) {
   const { container } = props;
   const { selectionRange: currentRange, restoreRange } = useSelectionRange();
-  const { mergeTags } = useContext(EditorPropsContext);
-
   const execCommand = (cmd: string, val?: any) => {
     if (!container) {
       console.error('No container');
@@ -77,7 +76,6 @@ export function TextToolbar(props: TextToolbarProps) {
       if (target) {
         link.setAttribute('target', target);
       }
-      link.style.color = 'inherit';
       link.style.textDecoration = linkData.underline ? 'underline' : 'none';
       link.setAttribute('href', linkData.link);
     } else {
@@ -88,128 +86,132 @@ export function TextToolbar(props: TextToolbarProps) {
     props.onChange(html);
   };
 
-  const getMountNode = () => getShadowRoot().getElementById('TextToolbar')!;
-  const getPopoverMountNode = () =>
-    document.getElementById(FIXED_CONTAINER_ID)!;
+  const getMountNode = () => document.getElementById('TextToolbar')!;
 
   return (
-    <div id='TextToolbar' style={{ display: 'flex', flexWrap: 'nowrap' }}>
-      <Tooltip
-        color='#fff'
-        title={
-          <FontFamily onChange={(val) => execCommand('fontName', val)} />
-        }
-        getPopupContainer={getPopoverMountNode}
-      >
-        <Button style={{ marginRight: 2,  height: 26 }} size='small' icon={<IconFont iconName='icon-font' />} />
-      </Tooltip>
-      <Tooltip
-        color='#fff'
-        title={
-          <FontSizeList onChange={(val) => execCommand('fontSize', val)} />
-        }
-        getPopupContainer={getPopoverMountNode}
-      >
-        <Button style={{ marginRight: 2,  height: 26 }} size='small' icon={<FontSizeOutlined />} />
-      </Tooltip>
-      <ToolItem
-        onClick={() => execCommand('bold')}
-        icon={<BoldOutlined />}
-        title='Bold'
-      />
-      <ToolItem
-        onClick={() => execCommand('italic')}
-        icon={<ItalicOutlined />}
-        title='Italic'
-      />
-      <ColorPicker
-        label=''
-        placement='topLeft'
-        onChange={(color) => execCommand('foreColor', color)}
-        getPopupContainer={getPopoverMountNode}
-        showInput={false}
-      >
-        <ToolItem icon={<FontColorsOutlined />} title='Text color' />
-      </ColorPicker>
-      <ColorPicker
-        label=''
-        showInput={false}
-        placement='topLeft'
-        onChange={(color) => execCommand('hiliteColor', color)}
-        getPopupContainer={getPopoverMountNode}
-      >
-        <ToolItem icon={<BgColorsOutlined />} title='Background color' />
-      </ColorPicker>
-      <ToolItem
-        onClick={() => execCommand('strikeThrough')}
-        icon={<StrikethroughOutlined />}
-        title='StrikethroughOutlined'
-      />
-      <ToolItem
-        onClick={() => execCommand('underline')}
-        icon={<UnderlineOutlined />}
-        title='UnderlineOutlined'
-      />
+    <div id='TextToolbar'>
+      <Stack vertical spacing='tight'>
+        <Stack spacing='extraTight'>
+          <Tooltip
+            color='#fff'
+            title={
+              <FontFamily onChange={(val) => execCommand('fontName', val)} />
+            }
+            getPopupContainer={getMountNode}
+          >
+            <Button
+              size='small'
+              icon={(
+                <TextStyle variation='strong'>
+                  <strong>F</strong>
+                </TextStyle>
+              )}
+            />
+          </Tooltip>
+          <Tooltip
+            color='#fff'
+            title={
+              <FontSizeList onChange={(val) => execCommand('fontSize', val)} />
+            }
+            getPopupContainer={getMountNode}
+          >
+            <Button size='small' icon={<FontSizeOutlined />} />
+          </Tooltip>
+          <ToolItem
+            onClick={() => execCommand('bold')}
+            icon={<BoldOutlined />}
+            title='Bold'
+          />
+          <ToolItem
+            onClick={() => execCommand('italic')}
+            icon={<ItalicOutlined />}
+            title='Italic'
+          />
+          <ColorPicker
+            label=''
+            onChange={(color) => execCommand('foreColor', color)}
+            getPopupContainer={getMountNode}
+            placement='left'
+            showInput={false}
+            align={{
+              offset: [-170],
+            }}
+          >
+            <ToolItem icon={<FontColorsOutlined />} title='Text color' />
+          </ColorPicker>
+          <ColorPicker
+            label=''
+            showInput={false}
+            onChange={(color) => execCommand('hiliteColor', color)}
+            getPopupContainer={getMountNode}
+            placement='left'
+            align={{
+              offset: [-170],
+            }}
+          >
+            <ToolItem icon={<BgColorsOutlined />} title='Background color' />
+          </ColorPicker>
+          <Link
+            currentRange={currentRange}
+            onChange={(values) => execCommand('createLink', values)}
+            getPopupContainer={getMountNode}
+          />
+          <ToolItem
+            onClick={() => execCommand('unlink')}
+            icon={<StopOutlined />}
+            title='Unlink'
+          />
+          <ToolItem
+            onClick={() => execCommand('removeFormat')}
+            icon={<CloseOutlined />}
+            title='Remove format'
+          />
+        </Stack>
 
-      <ToolItem
-        onClick={() => execCommand('insertHorizontalRule')}
-        icon={<MinusOutlined />}
-        title='Line'
-      />
-      <Link
-        currentRange={currentRange}
-        onChange={(values) => execCommand('createLink', values)}
-        getPopupContainer={getPopoverMountNode}
-      />
-      {/* <ToolItem
-        onClick={() => execCommand('unlink')}
-        icon={<StopOutlined />}
-        title='Unlink'
-      /> */}
-      {mergeTags && (
-        <Tooltip
-          color='#fff'
-          placement="bottom"
-          title={
-            <MergeTags value="" onChange={(val) => execCommand('insertHTML', val)} />
-          }
-          getPopupContainer={getPopoverMountNode}
-        >
-          <Button style={{ marginRight: 2,  height: 26 }} size='small' title='Merge tag' icon={<IconFont iconName="icon-merge-tags" />} />
-        </Tooltip>
-      )}
+        <Stack spacing='extraTight'>
+          <ToolItem
+            onClick={() => execCommand('justifyLeft')}
+            icon={<AlignLeftOutlined />}
+            title='Align left'
+          />
+          <ToolItem
+            onClick={() => execCommand('justifyCenter')}
+            icon={<AlignCenterOutlined />}
+            title='Align center'
+          />
+          <ToolItem
+            onClick={() => execCommand('justifyRight')}
+            icon={<AlignRightOutlined />}
+            title='Align right'
+          />
+          <ToolItem
+            onClick={() => execCommand('strikeThrough')}
+            icon={<StrikethroughOutlined />}
+            title='StrikethroughOutlined'
+          />
+          <ToolItem
+            onClick={() => execCommand('underline')}
+            icon={<UnderlineOutlined />}
+            title='UnderlineOutlined'
+          />
+          <ToolItem
+            onClick={() => execCommand('insertOrderedList')}
+            icon={<OrderedListOutlined />}
+            title='Orderlist'
+          />
+          <ToolItem
+            onClick={() => execCommand('insertUnorderedList')}
+            icon={<UnorderedListOutlined />}
+            title='Unorderlist'
+          />
 
-      <ToolItem
-        onClick={() => execCommand('justifyLeft')}
-        icon={<AlignLeftOutlined />}
-        title='Align left'
-      />
-      <ToolItem
-        onClick={() => execCommand('justifyCenter')}
-        icon={<AlignCenterOutlined />}
-        title='Align center'
-      />
-      <ToolItem
-        onClick={() => execCommand('justifyRight')}
-        icon={<AlignRightOutlined />}
-        title='Align right'
-      />
-      <ToolItem
-        onClick={() => execCommand('insertOrderedList')}
-        icon={<OrderedListOutlined />}
-        title='Orderlist'
-      />
-      <ToolItem
-        onClick={() => execCommand('insertUnorderedList')}
-        icon={<UnorderedListOutlined />}
-        title='Unorderlist'
-      />
-
-      <ToolItem
-        onClick={() => execCommand('removeFormat')}
-        icon={<CloseOutlined />}
-        title='Remove format'
-      />
+          <ToolItem
+            onClick={() => execCommand('insertHorizontalRule')}
+            icon={<MinusOutlined />}
+            title='Line'
+          />
+        </Stack>
+      </Stack>
     </div>
   );
 }

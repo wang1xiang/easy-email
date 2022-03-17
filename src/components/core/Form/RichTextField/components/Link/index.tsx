@@ -6,6 +6,11 @@ import { Form } from 'react-final-form';
 import { Stack } from '@/components/UI/Stack';
 import { SearchField, SwitchField } from '@/components/core/Form';
 
+import * as Yup from 'yup';
+
+const schema = Yup.object().shape({
+  link: Yup.string().url().required(),
+});
 export interface LinkParams {
   link: string;
   blank: boolean;
@@ -88,6 +93,7 @@ export function Link(props: LinkProps) {
     <Form
       key={initialValues.link}
       enableReinitialize
+      validationSchema={schema}
       initialValues={initialValues}
       onSubmit={onSubmit}
     >
@@ -129,7 +135,7 @@ export function Link(props: LinkProps) {
               </Stack>
             }
           >
-            <Button style={{ marginRight: 2,  height: 26, lineHeight: '26px' }} title='Link' size='small' icon={<LinkOutlined />} />
+            <Button size='small' icon={<LinkOutlined />} />
           </Tooltip>
         );
       }}
