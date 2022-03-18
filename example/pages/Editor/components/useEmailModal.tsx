@@ -50,7 +50,7 @@ export function useEmailModal() {
       }).html;
       html = html.replace(/<style type="text\/css">(([\s\S])*?)<\/style>/, (match, $1) => {
         return `<style type="text/css">
-          ${$1} .mjml-body {margin: 0 auto;width: fit-content;} .mjml-table > table {
+          ${$1} .mjml-body {margin: 0 auto;width: fit-content;} .mjml-table {
             width: ${customBlockData.attributes.width || '600px'}!important;
           }
         </style>`
