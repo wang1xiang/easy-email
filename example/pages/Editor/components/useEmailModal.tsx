@@ -43,31 +43,44 @@ export function useEmailModal() {
       let html = mjml(transformToMjml({
         data: customBlockData,
         mode: 'production',
-        context: customBlockData
+        context: customBlockData,
       }), {
         beautify: true,
         validationLevel: 'soft',
       }).html;
       html = html.replace(/<style type="text\/css">(([\s\S])*?)<\/style>/, (match, $1) => {
-        console.log(match);
         return `<style type="text/css">
-          ${$1} .mjml-body {margin: 0 auto}
+          ${$1} .mjml-body {margin: 0 auto;width: fit-content;} .mjml-table > table {
+            width: ${customBlockData.attributes.width || '600px'}!important;
+          }
         </style>`
       });
-      dispatch(
-        email.actions.send({
-          data: {
-            toEmail: values.toEmail,
-            subject: emailData.subject,
-            text: emailData.subTitle || emailData.subject,
-            html,
-          },
-          success: () => {
-            closeModal();
-            message.success('Email send!');
-          },
+      console.log(html);
+      // dispatch(
+      //   email.actions.send({
+      //     data: {
+      //       toEmail: values.toEmail,
+      //       subject: emailData.subject,
+      //       text: emailData.subTitle || emailData.subject,
+      //       html,
+      //     },
+      //     success: () => {
+      //       closeModal();
+      //       message.success('Email send!');
+      //     },
+      //   })
+      // );
+      fetch('https://app-test.quickcep.com/ma/api/campaign/test', {
+        method: 'post',
+        headers: {
+          'quick-token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNDc1NDAzMDUwMjE4OTA5Njk4IiwiZXhwIjoxNjQ3NjEzNjYyLCJzdG9yZUlkIjoyMTcsImlhdCI6MTY0NzU3MDQ2MiwidXNlcklkIjoxNDc1NDAzMDUwMjE4OTA5Njk4LCJzdGFmZklkIjoxNDc5NzYwOTEzNTY5NjE5OTcwfQ.9MdyY0RMvdQNvwHnCPBOUXISO2Z3qQ6ZuFuBDhnT6N4',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          sendTo: values.toEmail,
+          emailContentHtml: html
         })
-      );
+      })
     },
     [dispatch, emailData]
   );

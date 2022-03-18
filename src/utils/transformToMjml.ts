@@ -163,7 +163,7 @@ export function transformToMjml(options: TransformToMjmlOption): string {
         }
               ${value['content-background-color']
           ? `<mj-wrapper background-color="${value['content-background-color']}" />
-                     <mj-section background-color="${value['content-background-color']}" />
+                     <mj-section css-class="mjml-table" background-color="${value['content-background-color']}" />
                     `
           : ''
         }
@@ -188,7 +188,7 @@ export function transformToMjml(options: TransformToMjmlOption): string {
             `;
     case BasicType.SECTION:
       return `
-              <mj-section ${attributeStr}>
+              <mj-section css-class="mjml-table" ${attributeStr}>
                ${children || `<mj-column>${placeholder}</mj-column>`}
               </mj-section>
             `;
@@ -202,7 +202,7 @@ export function transformToMjml(options: TransformToMjmlOption): string {
       return `
               <mj-wrapper ${attributeStr}>
                ${children ||
-        `<mj-section><mj-column>${placeholder}</mj-column></mj-section>`
+        `<mj-section css-class="mjml-table"><mj-column>${placeholder}</mj-column></mj-section>`
         }
               </mj-wrapper>
             `;
